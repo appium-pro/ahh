@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from appium.webdriver.common.mobileby import MobileBy
 from appium import webdriver
-from ..base_page import BasePage
-from .meeting_page import MeetingPage, MeetingPageIOS
+from pages import BasePage, MeetingPage
 
 
 class StartMeetingPage(BasePage):
@@ -23,7 +22,7 @@ class StartMeetingPage(BasePage):
         self.wait(self.ADD_CONTACTS)
         self.tap_el(self.wait(self.START_MEETING_BUTTON))
         self.wait(self.ACTUALLY_START_MEETING_BUTTON).click()
-        return MeetingPage(self.driver)
+        return MeetingPage.instance(self.driver)
 
     def join_meeting(self: 'StartMeetingPage', meeting_id: str, meeting_pass: str) -> None:
         self.wait(self.JOIN_MEETING_BUTTON).click()
@@ -38,7 +37,3 @@ class StartMeetingPageIOS(StartMeetingPage):
     START_MEETING_BUTTON = (MobileBy.ACCESSIBILITY_ID, 'New Meeting')
     ACTUALLY_START_MEETING_BUTTON = (By.XPATH, '//XCUIElementTypeButton[@name="Start a Meeting"]')
     ADD_CONTACTS = (MobileBy.ACCESSIBILITY_ID, 'Add Contacts')
-
-    def start_meeting(self: 'StartMeetingPage') -> MeetingPageIOS:
-        super().start_meeting()
-        return MeetingPageIOS(self.driver)

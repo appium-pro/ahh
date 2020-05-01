@@ -23,6 +23,7 @@ def zoom_android_driver(zoom_android_caps: Dict[str, str]) -> webdriver.Remote:
 def zoom_ios_driver(zoom_ios_caps: Dict[str, str]) -> webdriver.Remote:
     driver = get_driver(zoom_ios_caps)
     yield driver
+    driver.terminate_app('us.zoom.videomeetings')
     driver.quit()
 
 
