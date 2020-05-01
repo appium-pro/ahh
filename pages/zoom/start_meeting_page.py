@@ -20,7 +20,7 @@ class StartMeetingPage(BasePage):
 
     def start_meeting(self: 'StartMeetingPage') -> MeetingPage:
         self.wait(self.ADD_CONTACTS)
-        self.tap_el(self.wait(self.START_MEETING_BUTTON))
+        self.tap_el(self.wait_for_nonzero_size(self.START_MEETING_BUTTON))
         self.wait(self.ACTUALLY_START_MEETING_BUTTON).click()
         return MeetingPage.instance(self.driver)
 

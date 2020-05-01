@@ -1,5 +1,9 @@
 from appium import webdriver
-from pages import StartMeetingPage
+from pages import StartMeetingPage, NotesPage
+
+
+NOTES_BUNDLE_ID = 'com.apple.mobilenotes'
+ZOOM_BUNDLE_ID = 'us.zoom.videomeetings'
 
 
 class TestZoom(object):
@@ -20,6 +24,12 @@ class TestZoom(object):
         # 6. android - verify meeting ended
         start = StartMeetingPage.instance(zoom_ios_driver)
         meeting = start.start_meeting()
-        invite_url = meeting.get_invite_url()
+        meeting.join_audio()
+        meeting.copy_invite_url()
+        zoom_ios_driver.activate_app(NOTES_BUNDLE_ID)
+        notes = NotesPage.instance(zoom_ios_driver)
+        invite_url = notes.get_clipboard_text()
         print(invite_url)
+        zoom_ios_driver.activate_app(ZOOM_BUNDLE_ID)
+        meeting.end_meeting()
         raise Exception('ok')

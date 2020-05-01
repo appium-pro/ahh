@@ -10,12 +10,31 @@ from typing import Tuple, TypeVar
 
 
 T = TypeVar('T')
+Locator = Tuple[By, str]
 
 
 def class_for_name(module_name: str, class_name: str) -> type:
     """ This is a helper method to get a class reference dynamically """
     m = importlib.import_module(module_name)
     return getattr(m, class_name)
+
+
+class nonzero_size(object):
+    def __init__(self, el: WebElement) -> 'nonzero_size':
+        self.el = el
+
+    def __call__(self, driver: webdriver.Remote):
+        rect = self.el.rect
+        return rect['width'] != 0 and rect['height'] != 0
+
+
+class has_url_text(object):
+    def __init__(self: 'has_url_text', el: WebElement) -> 'has_url_text':
+        self.el = el
+
+    def __call__(self: 'has_url_text', driver: webdriver.Remote):
+        text: str = self.el.get_attribute('value')
+        return text.startswith('http')
 
 
 class BasePage(object):
@@ -25,13 +44,23 @@ class BasePage(object):
         self._wait = WebDriverWait(driver, 10)
         self._short_wait = WebDriverWait(driver, 3)
 
-    def wait(self: 'BasePage', locator: Tuple[By, str], waiter: WebDriverWait = None) -> WebElement:
+    def wait(self: 'BasePage', locator: Locator, waiter: WebDriverWait = None) -> WebElement:
         if waiter is None:
             waiter = self._wait
         return waiter.until(EC.presence_of_element_located(locator))
 
-    def short_wait(self: 'BasePage', locator: Tuple[By, str]) -> WebElement:
+    def short_wait(self: 'BasePage', locator: Locator) -> WebElement:
         return self.wait(locator, waiter=self._short_wait)
+
+    def wait_for_nonzero_size(self: 'BasePage', locator: Locator) -> WebElement:
+        el = self.wait(locator)
+        self._wait.until(nonzero_size(el))
+        return el
+
+    def wait_for_url(self: 'BasePage', locator: Locator) -> str:
+        el = self.wait(locator)
+        self._wait.until(has_url_text(el))
+        return el.get_attribute('value')
 
     def tap_at(self: 'BasePage', x: int, y: int) -> None:
         actions = ActionBuilder(self.driver)
