@@ -15,6 +15,9 @@ class NotesPage(BasePage):
         self.wait(self.PASTE).click()
         return self.wait(self.LINK).text
 
+    def back_to_call(self: 'NotesPage') -> None:
+        self.tap_at(100, 5)
+
 
 class NotesPageIOS(NotesPage):
     NEW_NOTE = (MobileBy.ACCESSIBILITY_ID, 'New note')

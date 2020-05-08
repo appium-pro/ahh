@@ -43,6 +43,7 @@ class BasePage(object):
         self.driver = driver
         self._wait = WebDriverWait(driver, 10)
         self._short_wait = WebDriverWait(driver, 3)
+        self._long_wait = WebDriverWait(driver, 30)
 
     def wait(self: 'BasePage', locator: Locator, waiter: WebDriverWait = None) -> WebElement:
         if waiter is None:
@@ -51,6 +52,9 @@ class BasePage(object):
 
     def short_wait(self: 'BasePage', locator: Locator) -> WebElement:
         return self.wait(locator, waiter=self._short_wait)
+
+    def long_wait(self: 'BasePage', locator: Locator) -> WebElement:
+        return self.wait(locator, waiter=self._long_wait)
 
     def wait_for_nonzero_size(self: 'BasePage', locator: Locator) -> WebElement:
         el = self.wait(locator)
@@ -83,5 +87,5 @@ class BasePage(object):
         plat = driver.capabilities['platformName'].lower()
         klass = cls.__name__
         if plat != 'android':
-            klass = class_for_name('pages', f'{klass}IOS')
-        return klass(driver)
+            klass = f'{klass}IOS'
+        return class_for_name('pages', klass)(driver)

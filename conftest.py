@@ -34,6 +34,8 @@ def zoom_android_caps() -> Dict[str, str]:
         'deviceName': 'Android',
         'appPackage': 'us.zoom.videomeetings',
         'appActivity': 'com.zipow.videobox.LauncherActivity',
+        'automationName': 'UiAutomator2',
+        'newCommandTimeout': 300,
     }
 
 
@@ -49,4 +51,5 @@ def zoom_ios_caps() -> Dict[str, str]:
         'xcodeSigningId': 'iPhone Developer',
         'updatedWDABundleId': 'io.cloudgrey.wda',
         'automationName': 'XCUITest',
+        'newCommandTimeout': 300,
     }

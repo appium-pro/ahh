@@ -28,9 +28,9 @@ class StartMeetingPage(BasePage):
         self.wait(self.JOIN_MEETING_BUTTON).click()
         self.wait(self.MEETING_ID_FIELD).send_keys(meeting_id)
         self.driver.find_element(*self.ACTUALLY_JOIN_MEETING_BUTTON).click()
-        self.wait(self.PASSWORD_FIELD).send_keys(meeting_pass)
-        self.driver.find_element(*self.PASSWORD_OK_BUTTON).click()
-        self.wait(self.LEAVE_BTN)
+        # self.wait(self.PASSWORD_FIELD).send_keys(meeting_pass)
+        # self.driver.find_element(*self.PASSWORD_OK_BUTTON).click()
+        self.long_wait(self.LEAVE_BTN)
 
 
 class StartMeetingPageIOS(StartMeetingPage):
