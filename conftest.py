@@ -20,6 +20,13 @@ def zoom_android_driver(zoom_android_caps: Dict[str, str]) -> webdriver.Remote:
 
 
 @pytest.fixture(scope='function')
+def craigslist_android_driver(craigslist_android_caps: Dict[str, str]) -> webdriver.Remote:
+    driver = get_driver(craigslist_android_caps)
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture(scope='function')
 def zoom_ios_driver(zoom_ios_caps: Dict[str, str]) -> webdriver.Remote:
     driver = get_driver(zoom_ios_caps)
     yield driver
@@ -53,3 +60,17 @@ def zoom_ios_caps() -> Dict[str, str]:
         'automationName': 'XCUITest',
         'newCommandTimeout': 300,
     }
+
+
+@pytest.fixture()
+def craigslist_android_caps() -> Dict[str, str]:
+    return {
+        'platformName': 'Android',
+        'deviceName': 'Android',
+        'app': '/Users/jlipps/Code/testapps/craigslist.apk',
+        'appWaitActivity': 'org.craigslist.CraigslistMobile.MainActivity',
+        'automationName': 'UiAutomator2',
+        'newCommandTimeout': 300,
+    }
+
+

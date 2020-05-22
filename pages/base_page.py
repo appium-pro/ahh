@@ -89,3 +89,7 @@ class BasePage(object):
         if plat != 'android':
             klass = f'{klass}IOS'
         return class_for_name('pages', klass)(driver)
+
+    @staticmethod
+    def text_locator(text: str) -> Locator:
+        return (By.XPATH, f'//*[@text="{text}"]')
