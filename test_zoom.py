@@ -1,5 +1,6 @@
 from appium import webdriver
 from pages import StartMeetingPage, NotesPage
+from conftest import MakeDriver
 
 
 NOTES_BUNDLE_ID = 'com.apple.mobilenotes'
@@ -12,12 +13,14 @@ class TestZoom(object):
     MEETING_ID = '75548979325'
     MEETING_PASS = '9mN2Rh'
 
-    def test_join_meeting(self: 'TestZoom', zoom_android_driver: webdriver.Remote) -> None:
-        start_meeting = StartMeetingPage.instance(zoom_android_driver)
+    def test_join_meeting(self: 'TestZoom', make_driver: MakeDriver) -> None:
+        driver = make_driver("zoom_android")
+        start_meeting = StartMeetingPage.instance(driver)
         start_meeting.join_meeting(self.MEETING_ID, self.MEETING_PASS)
 
-    def test_create_and_join_meeting(self: 'TestZoom', zoom_ios_driver: webdriver.Remote,
-            zoom_android_driver: webdriver.Remote) -> None:
+    def test_create_and_join_meeting(self: 'TestZoom', make_driver: MakeDriver) -> None:
+        zoom_ios_driver = make_driver("zoom_ios")
+        zoom_android_driver = make_driver("zoom_android")
         # 1. DONE ios - start a meeting
         # 2. DONE ios - scrape the meeting credentials
         # 3. android - use credentials to join a meeting
