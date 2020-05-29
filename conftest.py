@@ -44,8 +44,8 @@ CRAIGSLIST_ANDROID_CAPS = {
 TWITTER_ANDROID_CAPS = {
     'platformName': 'Android',
     'deviceName': 'Android',
-    'app': '/Users/jlipps/Code/testapps/twitter.apk',
-    'appWaitActivity': 'com.twitter.app.main.MainActivity',
+    'appPackage': 'com.twitter.android',
+    'appActivity': 'com.twitter.android.StartActivity',
     'automationName': 'UiAutomator2',
     'newCommandTimeout': 300,
 }
