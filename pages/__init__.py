@@ -11,6 +11,8 @@ from pages.craigslist.loc_perms_page import LocPermsPage
 from pages.craigslist.get_started_page import GetStartedPage
 
 # Twitter
+from pages.twitter.profile_page import TwProfilePage
+from pages.twitter.search_page import TwSearchPage
 from pages.twitter.home_page import TwHomePage
 from pages.twitter.login_page import TwLoginPage
 from pages.twitter.splash_page import TwSplashPage

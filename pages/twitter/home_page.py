@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from appium.webdriver.common.mobileby import MobileBy
-from pages import BasePage
+from pages import BasePage, TwSearchPage
 
 
 class TwHomePage(BasePage):
@@ -11,6 +11,7 @@ class TwHomePage(BasePage):
     ACCOUNT_MENU = BasePage.text_locator('Account')
     LOGIN_AND_SECURITY = BasePage.text_locator('Login and security')
     LOG_OUT = BasePage.text_locator('Log out')
+    SEARCH_ICON = (MobileBy.ACCESSIBILITY_ID, 'Explore')  # TODO
 
     def allow_data_collection(self: 'TwHomePage') -> None:
         self.wait(self.BTN1).click()
@@ -28,3 +29,7 @@ class TwHomePage(BasePage):
         self.wait(self.LOGIN_AND_SECURITY)
         self.scroll_to(self.LOG_OUT).click()
         self.wait(self.BTN1).click()
+
+    def nav_to_search(self: 'TwSearchPage') -> TwSearchPage:
+        self.wait(self.SEARCH_ICON).click()
+        return TwSearchPage.instance(self.driver)
