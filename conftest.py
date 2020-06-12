@@ -51,6 +51,20 @@ TWITTER_ANDROID_CAPS = {
 }
 
 
+YOUMAIL_IOS_CAPS = {
+    'platformName': 'iOS',
+    'platformVersion': '13.4',
+    'deviceName': 'iPhone 11 Pro',
+    'bundleId': 'RH8QQ5UXC8.youmail.',
+    'udid': 'auto',
+    'xcodeOrgId': os.environ.get('XCODE_ORG_ID'),
+    'xcodeSigningId': 'iPhone Developer',
+    'updatedWDABundleId': 'io.cloudgrey.wda',
+    'automationName': 'XCUITest',
+    'newCommandTimeout': 300,
+}
+
+
 @pytest.fixture
 def make_driver() -> webdriver.Remote:
     driver = None
@@ -65,6 +79,8 @@ def make_driver() -> webdriver.Remote:
             caps = CRAIGSLIST_ANDROID_CAPS
         elif app == "twitter":
             caps = TWITTER_ANDROID_CAPS
+        elif app == "youmail":
+            caps = YOUMAIL_IOS_CAPS
         driver = webdriver.Remote(
             command_executor='http://localhost:4723/wd/hub',
             desired_capabilities=caps
