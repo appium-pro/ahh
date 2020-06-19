@@ -16,3 +16,7 @@ from pages.twitter.search_page import TwSearchPage
 from pages.twitter.home_page import TwHomePage
 from pages.twitter.login_page import TwLoginPage
 from pages.twitter.splash_page import TwSplashPage
+
+# YouMail
+from pages.youmail.voicemail_page import YMVoicemailPage, YMVoicemailPageIOS
+from pages.youmail.voicemails_page import YMVoicemailsPage, YMVoicemailsPageIOS

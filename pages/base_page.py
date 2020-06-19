@@ -52,7 +52,7 @@ class BasePage(object):
         self.driver = driver
         self._wait = WebDriverWait(driver, 10)
         self._short_wait = WebDriverWait(driver, 3)
-        self._long_wait = WebDriverWait(driver, 30)
+        self._long_wait = WebDriverWait(driver, 60)
 
     def wait(self: 'BasePage', locator: Locator, waiter: WebDriverWait = None) -> WebElement:
         if waiter is None:

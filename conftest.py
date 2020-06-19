@@ -53,13 +53,12 @@ TWITTER_ANDROID_CAPS = {
 
 YOUMAIL_IOS_CAPS = {
     'platformName': 'iOS',
-    'platformVersion': '13.4',
+    'platformVersion': '13.5',
     'deviceName': 'iPhone 11 Pro',
     'bundleId': 'RH8QQ5UXC8.youmail.',
-    'udid': 'auto',
-    'xcodeOrgId': os.environ.get('XCODE_ORG_ID'),
-    'xcodeSigningId': 'iPhone Developer',
-    'updatedWDABundleId': 'io.cloudgrey.wda',
+    'udid': '00008030-000409213C6A802E',
+    'usePrebuiltWDA': True,
+    'derivedDataPath': '/Users/jlipps/Library/Developer/Xcode/DerivedData/WebDriverAgent-avsfgzldrqurgfefzpwggvhisjdc',
     'automationName': 'XCUITest',
     'newCommandTimeout': 300,
 }
