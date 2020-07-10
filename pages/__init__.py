@@ -1,6 +1,6 @@
 # flake8: noqa
 
-from pages.base_page import BasePage
+from pages.base_page import BasePage, Locator
 from pages.zoom.meeting_page import MeetingPage, MeetingPageIOS
 from pages.zoom.start_meeting_page import StartMeetingPage, StartMeetingPageIOS
 from pages.notes.notes_page import NotesPage, NotesPageIOS
@@ -20,3 +20,8 @@ from pages.twitter.splash_page import TwSplashPage
 # YouMail
 from pages.youmail.voicemail_page import YMVoicemailPage, YMVoicemailPageIOS
 from pages.youmail.voicemails_page import YMVoicemailsPage, YMVoicemailsPageIOS
+
+# YouTube
+from pages.youtube.video_page import YTVideoPage
+from pages.youtube.search_results import YTSearchResultsPage
+from pages.youtube.home_page import YTHomePage
