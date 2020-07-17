@@ -74,6 +74,19 @@ YOUTUBE_ANDROID_CAPS = {
 }
 
 
+WEATHER_IOS_CAPS = {
+    'platformName': 'iOS',
+    'platformVersion': '13.5',
+    'deviceName': 'iPhone 11 Pro',
+    'bundleId': 'com.apple.weather',
+    'udid': '00008030-000409213C6A802E',
+    'usePrebuiltWDA': True,
+    'derivedDataPath': '/Users/jlipps/Library/Developer/Xcode/DerivedData/WebDriverAgent-avsfgzldrqurgfefzpwggvhisjdc',
+    'automationName': 'XCUITest',
+    'newCommandTimeout': 300,
+}
+
+
 @pytest.fixture
 def make_driver() -> webdriver.Remote:
     driver = None
@@ -92,6 +105,8 @@ def make_driver() -> webdriver.Remote:
             caps = YOUMAIL_IOS_CAPS
         elif app == "youtube":
             caps = YOUTUBE_ANDROID_CAPS
+        elif app == "weather":
+            caps = WEATHER_IOS_CAPS
         driver = webdriver.Remote(
             command_executor='http://localhost:4723/wd/hub',
             desired_capabilities=caps

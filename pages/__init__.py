@@ -25,3 +25,7 @@ from pages.youmail.voicemails_page import YMVoicemailsPage, YMVoicemailsPageIOS
 from pages.youtube.video_page import YTVideoPage
 from pages.youtube.search_results import YTSearchResultsPage
 from pages.youtube.home_page import YTHomePage
+
+# IOS Weather
+from pages.weather.weather_page import WeatherPage, WeatherPageIOS
+from pages.weather.city_list_page import CityListPage, CityListPageIOS
