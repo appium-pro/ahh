@@ -103,8 +103,10 @@ class BasePage(object):
         p = actions.add_pointer_input("touch", "finger1")
         p_actions = PointerActions(p)
         p.create_pointer_move(duration=0, x=start_x, y=start_y, origin='viewport')
+        # TODO make cross platform
         p_actions.pointer_down()
         p.create_pointer_move(duration=duration_ms, x=end_x, y=end_y, origin='viewport')
+        p_actions.pause(duration=duration_ms / 1000)
         p_actions.pointer_up()
         actions.perform()
 
@@ -119,8 +121,18 @@ class BasePage(object):
         end_y = int(height * relative_end_y)
         self.swipe_by_pixels(start_x, start_y, end_x, end_y, duration_ms)
 
+    def swipe_in_el(self, el: WebElement, relative_start_x: float = 0.5,
+                    relative_start_y: float = 0.5, relative_end_x: float = 0.5,
+                    relative_end_y: float = 0.5, duration_ms: int = 200) -> None:
+        rect = el.rect
+        start_x = rect['x'] + (rect['width'] * relative_start_x)
+        start_y = rect['y'] + (rect['height'] * relative_start_y)
+        end_x = rect['x'] + (rect['width'] * relative_end_x)
+        end_y = rect['y'] + (rect['height'] * relative_end_y)
+        self.swipe_by_pixels(start_x, start_y, end_x, end_y, duration_ms)
+
     def scroll(self, direction: ScrollDirection, amount: float = 0.5,
-               duration_ms: int = 200) -> None:
+               duration_ms: int = 500) -> None:
         relative_start_x = 0.5
         relative_start_y = 0.5
         relative_end_x = 0.5
