@@ -108,7 +108,7 @@ def make_driver() -> webdriver.Remote:
         elif app == "weather":
             caps = WEATHER_IOS_CAPS
         driver = webdriver.Remote(
-            command_executor='http://localhost:4723/wd/hub',
+            command_executor='http://localhost:4723',
             desired_capabilities=caps
         )
         return driver

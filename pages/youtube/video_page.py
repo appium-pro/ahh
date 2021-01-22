@@ -14,14 +14,14 @@ class YTVideoPage(BasePage):
     PAUSE = (MobileBy.ACCESSIBILITY_ID, 'Pause video')
     PLAY = (MobileBy.ACCESSIBILITY_ID, 'Play video')
     MINIMIZE = (MobileBy.ACCESSIBILITY_ID, 'Minimize')
-    CLOSE = (MobileBy.ACCESSIBILITY_ID, 'Close')
+    CLOSE = (MobileBy.ACCESSIBILITY_ID, 'Close miniplayer')
     HOME = (MobileBy.ACCESSIBILITY_ID, 'Home')
 
     def like(self: 'YTVideoPage') -> None:
         self.wait(self.LIKE_BUTTON).click()
 
     def get_num_likes(self: 'YTVideoPage') -> int:
-        return int(self.wait(self.LIKE_COUNT).text)
+        return int(self.long_wait(self.LIKE_COUNT).text)
 
     def _mini_control(self: 'YTVideoPage', control: Locator) -> None:
         try:
