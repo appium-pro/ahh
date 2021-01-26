@@ -155,9 +155,15 @@ class BasePage(object):
 
     def scroll_to(self, locator: Locator, max_scrolls: int = 10,
                   direction: ScrollDirection = ScrollDirection.down) -> WebElement:
+        first_scroll = True
         scrolls = 0
         while scrolls < max_scrolls:
             try:
+                if first_scroll:
+                    # first time through the loop of scrolling, do an actual wait in case the
+                    # element is already on the screen
+                    first_scroll = False
+                    return self.short_wait(locator)
                 return self.driver.find_element(*locator)
             except NoSuchElementException:
                 self.scroll(direction)
